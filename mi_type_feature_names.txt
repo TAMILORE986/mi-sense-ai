@@ -1,0 +1,7 @@
+age
+sex
+hs_cTnT
+systolic_bp
+bmi
+height
+weight

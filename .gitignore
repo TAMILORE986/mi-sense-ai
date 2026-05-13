@@ -1,0 +1,23 @@
+# Large training data — not needed for the app
+full_integrated_ecg_data.npy
+full_integrated_clinical_data.csv
+full_integrated_labels.npy
+X_ecg_test.npy
+X_clinical_test_scaled.npy
+y_test.npy
+X_clinical_xgboost_test.npy
+y_xgboost_test.npy
+ptbxl_database.csv
+scp_statements.csv
+clinical_data_full.csv
+
+# PTB-XL dataset folder
+ptb-xl/
+
+# Virtual environment — never push this
+venv/
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo

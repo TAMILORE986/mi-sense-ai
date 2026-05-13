@@ -1,0 +1,17 @@
+MI Type Classifier Accuracy: 0.5019
+
+                         precision    recall  f1-score   support
+
+            Anterior MI       0.00      0.00      0.00        49
+       Anterolateral MI       0.00      0.00      0.00        20
+        Anteroseptal MI       0.26      0.02      0.03       317
+            Inferior MI       0.51      0.98      0.67       535
+       Inferolateral MI       0.00      0.00      0.00        96
+     Inferoposterior MI       0.00      0.00      0.00         7
+Inferoposterolateral MI       0.00      0.00      0.00        10
+             Lateral MI       0.00      0.00      0.00        22
+           Posterior MI       0.00      0.00      0.00         2
+
+               accuracy                           0.50      1058
+              macro avg       0.09      0.11      0.08      1058
+           weighted avg       0.33      0.50      0.35      1058

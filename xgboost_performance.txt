@@ -1,0 +1,11 @@
+XGBoost Accuracy: 0.7894
+ROC-AUC:          0.7927
+
+              precision    recall  f1-score   support
+
+      Non-MI       0.80      0.96      0.87      3266
+          MI       0.69      0.29      0.41      1094
+
+    accuracy                           0.79      4360
+   macro avg       0.75      0.62      0.64      4360
+weighted avg       0.77      0.79      0.76      4360

@@ -1,0 +1,13 @@
+--- Final Model Performance Report ---
+Model Accuracy: 0.8427
+ROC-AUC Score:  0.8902
+
+Classification Report:
+              precision    recall  f1-score   support
+
+      Non-MI       0.87      0.92      0.90      3266
+          MI       0.73      0.60      0.66      1094
+
+    accuracy                           0.84      4360
+   macro avg       0.80      0.76      0.78      4360
+weighted avg       0.84      0.84      0.84      4360
