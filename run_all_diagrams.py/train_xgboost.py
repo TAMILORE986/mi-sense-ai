@@ -52,38 +52,13 @@ def train_xgboost_model():
         random_state=42
     )
 
-    # Fit and capture evaluation results
     model.fit(
         X_train, y_train,
         eval_set=[(X_test, y_test)],
         verbose=10
     )
 
-    # --- Plot log-loss convergence (Figure 4.4) ---
-    # Retrieve evaluation history
-    evals_result = model.evals_result()
-    # evals_result is a dict: {'validation_0': {'logloss': [list of values]}}
-    # In our eval_set we only passed (X_test, y_test) – that's 'validation_0'
-    train_loss = evals_result.get('validation_0', {}).get('logloss', [])
-    # For training loss, we need to pass an additional eval_set for train.
-    # Since we didn't, we'll just plot validation loss. To get both, we need to modify the fit call.
-    # To keep it simple, we'll plot only validation loss as the convergence curve.
-    # If you want both, see the note after the script.
-    if train_loss:
-        plt.figure(figsize=(10, 6))
-        plt.plot(train_loss, label='Validation Log‑Loss', color='blue')
-        plt.xlabel('Boosting Round')
-        plt.ylabel('Log‑Loss')
-        plt.title('XGBoost Log‑Loss Convergence (Validation Set)')
-        plt.legend()
-        plt.grid(True)
-        plt.savefig('xgboost_convergence.png', dpi=300, bbox_inches='tight')
-        plt.close()
-        print("Figure 4.4 saved as 'xgboost_convergence.png'")
-    else:
-        print("Warning: No log-loss history found. Convergence plot not generated.")
-
-    # --- Evaluation (unchanged from your original) ---
+    # --- Evaluation ---
     y_pred      = model.predict(X_test)
     y_pred_prob = model.predict_proba(X_test)[:, 1]
     accuracy    = accuracy_score(y_test, y_pred)

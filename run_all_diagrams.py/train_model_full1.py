@@ -5,7 +5,6 @@ from tensorflow.keras import layers, models, Input, callbacks
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
 import os
-import matplotlib.pyplot as plt
 
 # Target accuracy: 85–89% (realistic for medical MI detection)
 
@@ -94,6 +93,7 @@ def train_full_model():
     model.summary()
 
     # Early stopping: stop if val_loss does not improve for 5 epochs
+    # This prevents the model from continuing to memorise training data
     early_stop = callbacks.EarlyStopping(
         monitor='val_loss', patience=5,
         restore_best_weights=True, verbose=1
@@ -112,7 +112,7 @@ def train_full_model():
         epochs=30,           # cap; early stopping will halt sooner
         batch_size=64,       # larger batch = less noisy gradients
         callbacks=[early_stop, reduce_lr],
-        class_weight={0: 1.0, 1: 1.0},
+        class_weight={0: 1.0, 1: 1.0},  # adjust if dataset is imbalanced
         verbose=1
     )
 
@@ -126,34 +126,6 @@ def train_full_model():
     val_acc = max(history.history['val_accuracy'])
     print(f"\nBest Validation Accuracy: {val_acc:.4f} ({val_acc*100:.1f}%)")
     print("Training complete! Run evaluate_model_full.py to generate ROC curve and reports.")
-
-    # ==================== PLOT BOTH CURVES ====================
-    plt.figure(figsize=(12, 5))
-
-    # ----- Figure 4.2: Loss curves -----
-    plt.subplot(1, 2, 1)
-    plt.plot(history.history['loss'], label='Training Loss')
-    plt.plot(history.history['val_loss'], label='Validation Loss')
-    plt.title('Training and Validation Loss')
-    plt.xlabel('Epoch')
-    plt.ylabel('Loss')
-    plt.legend()
-    plt.grid(True)
-
-    # ----- Figure 4.3: Accuracy curves -----
-    plt.subplot(1, 2, 2)
-    plt.plot(history.history['accuracy'], label='Training Accuracy')
-    plt.plot(history.history['val_accuracy'], label='Validation Accuracy')
-    plt.title('Training and Validation Accuracy')
-    plt.xlabel('Epoch')
-    plt.ylabel('Accuracy')
-    plt.legend()
-    plt.grid(True)
-
-    plt.tight_layout()
-    plt.savefig('training_curves.png', dpi=300, bbox_inches='tight')
-    plt.show()
-    print("Loss and accuracy curves saved as 'training_curves.png' (Figures 4.2 and 4.3)")
 
 
 if __name__ == '__main__':
