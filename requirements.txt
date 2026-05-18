@@ -1,0 +1,5 @@
+streamlit
+tensorflow
+numpy
+pandas
+# add any other imports your app uses (e.g., PIL, opencv-python, etc.)
